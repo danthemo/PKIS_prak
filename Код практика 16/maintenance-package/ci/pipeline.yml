@@ -1,0 +1,121 @@
+pipeline:
+  name: toir-maintenance-package
+  version: "1"
+
+variables:
+  build_configuration: Release
+  api_contract: openapi/openapi-v1.yaml
+  migrations_path: migrations
+
+stages:
+  - checkout
+  - restore
+  - build
+  - unit_tests
+  - integration_tests
+  - contract_check
+  - migration_check
+  - security_scan
+  - package
+  - deploy_staging
+  - smoke_tests
+  - deploy_production
+
+jobs:
+  checkout:
+    stage: checkout
+    steps:
+      - name: Fetch sources
+        run: checkout
+
+  restore:
+    stage: restore
+    needs: [checkout]
+    steps:
+      - name: Restore dependencies
+        run: dotnet restore
+
+  build:
+    stage: build
+    needs: [restore]
+    steps:
+      - name: Build solution
+        run: dotnet build --configuration ${build_configuration} --no-restore
+
+  unit_tests:
+    stage: unit_tests
+    needs: [build]
+    steps:
+      - name: Run unit tests
+        run: dotnet test --configuration ${build_configuration} --filter Category=Unit
+
+  integration_tests:
+    stage: integration_tests
+    needs: [unit_tests]
+    services:
+      - name: postgres
+        image: postgres:16
+    steps:
+      - name: Run integration tests
+        run: dotnet test --configuration ${build_configuration} --filter Category=Integration
+
+  contract_check:
+    stage: contract_check
+    needs: [integration_tests]
+    steps:
+      - name: Validate OpenAPI contract
+        run: pwsh ./scripts/validate-openapi.ps1
+
+  migration_check:
+    stage: migration_check
+    needs: [contract_check]
+    steps:
+      - name: Check migration files
+        run: pwsh ./scripts/check-migrations.ps1
+
+  security_scan:
+    stage: security_scan
+    needs: [migration_check]
+    steps:
+      - name: Scan dependencies
+        run: dotnet list package --vulnerable
+      - name: Check repository secrets
+        run: echo "Secret scan is executed by the platform policy"
+
+  package:
+    stage: package
+    needs: [security_scan]
+    artifacts:
+      paths:
+        - openapi/
+        - migrations/
+        - config/
+        - monitoring/
+    steps:
+      - name: Create package
+        run: dotnet publish --configuration ${build_configuration} --no-build
+
+  deploy_staging:
+    stage: deploy_staging
+    needs: [package]
+    environment: staging
+    steps:
+      - name: Deploy to staging
+        run: deploy --environment staging
+
+  smoke_tests:
+    stage: smoke_tests
+    needs: [deploy_staging]
+    steps:
+      - name: Run smoke tests
+        run: smoke-test --base-url ${STAGING_BASE_URL} --contract ${api_contract}
+
+  deploy_production:
+    stage: deploy_production
+    needs: [smoke_tests]
+    environment: production
+    approval: manual
+    steps:
+      - name: Deploy to production
+        run: deploy --environment production --strategy rolling
+

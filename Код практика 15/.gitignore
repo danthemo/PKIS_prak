@@ -1,0 +1,5 @@
+.env
+backups/*.dump
+backups/*.sql
+backups/*.backup
+backups/*.tar

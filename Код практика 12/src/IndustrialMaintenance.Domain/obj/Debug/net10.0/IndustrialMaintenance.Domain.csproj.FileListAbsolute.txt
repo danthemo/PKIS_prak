@@ -1,0 +1,12 @@
+C:\Users\danth\Downloads\Documents\ПКИС\Код практика 12\src\IndustrialMaintenance.Domain\bin\Debug\net10.0\IndustrialMaintenance.Domain.deps.json
+C:\Users\danth\Downloads\Documents\ПКИС\Код практика 12\src\IndustrialMaintenance.Domain\bin\Debug\net10.0\IndustrialMaintenance.Domain.dll
+C:\Users\danth\Downloads\Documents\ПКИС\Код практика 12\src\IndustrialMaintenance.Domain\bin\Debug\net10.0\IndustrialMaintenance.Domain.pdb
+C:\Users\danth\Downloads\Documents\ПКИС\Код практика 12\src\IndustrialMaintenance.Domain\obj\Debug\net10.0\IndustrialMaintenance.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\danth\Downloads\Documents\ПКИС\Код практика 12\src\IndustrialMaintenance.Domain\obj\Debug\net10.0\IndustrialMaintenance.Domain.AssemblyInfoInputs.cache
+C:\Users\danth\Downloads\Documents\ПКИС\Код практика 12\src\IndustrialMaintenance.Domain\obj\Debug\net10.0\IndustrialMaintenance.Domain.AssemblyInfo.cs
+C:\Users\danth\Downloads\Documents\ПКИС\Код практика 12\src\IndustrialMaintenance.Domain\obj\Debug\net10.0\IndustrialMaintenance.Domain.csproj.CoreCompileInputs.cache
+C:\Users\danth\Downloads\Documents\ПКИС\Код практика 12\src\IndustrialMaintenance.Domain\obj\Debug\net10.0\IndustrialMaintenance.Domain.sourcelink.json
+C:\Users\danth\Downloads\Documents\ПКИС\Код практика 12\src\IndustrialMaintenance.Domain\obj\Debug\net10.0\IndustrialMaintenance.Domain.dll
+C:\Users\danth\Downloads\Documents\ПКИС\Код практика 12\src\IndustrialMaintenance.Domain\obj\Debug\net10.0\refint\IndustrialMaintenance.Domain.dll
+C:\Users\danth\Downloads\Documents\ПКИС\Код практика 12\src\IndustrialMaintenance.Domain\obj\Debug\net10.0\IndustrialMaintenance.Domain.pdb
+C:\Users\danth\Downloads\Documents\ПКИС\Код практика 12\src\IndustrialMaintenance.Domain\obj\Debug\net10.0\ref\IndustrialMaintenance.Domain.dll

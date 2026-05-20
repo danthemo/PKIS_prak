@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ToirStructuredLog",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "timestamp",
+    "level",
+    "traceId",
+    "operation",
+    "result",
+    "durationMs",
+    "message"
+  ],
+  "properties": {
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "level": {
+      "type": "string",
+      "enum": ["Trace", "Debug", "Information", "Warning", "Error", "Critical"]
+    },
+    "traceId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "userId": {
+      "type": ["string", "null"]
+    },
+    "role": {
+      "type": ["string", "null"]
+    },
+    "operation": {
+      "type": "string"
+    },
+    "entityType": {
+      "type": ["string", "null"]
+    },
+    "entityId": {
+      "type": ["string", "integer", "null"]
+    },
+    "result": {
+      "type": "string",
+      "enum": ["Success", "ValidationError", "Forbidden", "Conflict", "Failure"]
+    },
+    "durationMs": {
+      "type": "number",
+      "minimum": 0
+    },
+    "message": {
+      "type": "string"
+    }
+  }
+}
+
